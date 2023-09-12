@@ -1,6 +1,6 @@
 const planetScale = require("@netlify/planetscale/dist/index")
 
-exports.handler = withPlanetscale(async (event, context) => {
+exports.handler = planetScale.withPlanetscale(async (event, context) => {
   // const {
   //   planetscale: { connection },
   // } = context;
