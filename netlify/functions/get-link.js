@@ -9,6 +9,7 @@ export const handler = withPlanetscale(async (event, context) => {
   //   email,
   //   name,
   // ]);
+  //poopy
 
   return {
     statusCode: 200, body: event
