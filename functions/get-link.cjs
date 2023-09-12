@@ -1,4 +1,4 @@
-const planetScale = require("@netlify/planetscale")
+const planetScale = require("@netlify/planetscale/dist/index")
 
 exports.handler = withPlanetscale(async (event, context) => {
   // const {
