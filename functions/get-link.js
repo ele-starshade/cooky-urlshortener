@@ -1,6 +1,6 @@
-import { withPlanetscale } from "@netlify/planetscale";
+const planetScale = require("@netlify/planetscale")
 
-export const handler = withPlanetscale(async (event, context) => {
+exports.handler = withPlanetscale(async (event, context) => {
   // const {
   //   planetscale: { connection },
   // } = context;
