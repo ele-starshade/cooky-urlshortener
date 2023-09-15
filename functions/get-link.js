@@ -4,8 +4,8 @@ export const handler = async (event, context) => {
   const pathBlocks = event.path.split('/')
   const id = pathBlocks[pathBlocks.length - 1]
 
-  console.log(id)
-  console.log(event, context)
+  console.info(id)
+  console.info(event, context)
 
   if (!id) return { statusCode: 400 }
 
@@ -18,6 +18,8 @@ export const handler = async (event, context) => {
     }
   })
 
+  await client.connect()
+
   try {
     const db = client.db('link-shortener')
     const links = db.collection('links')
@@ -26,7 +28,7 @@ export const handler = async (event, context) => {
 
     const link = await links.findOne(query, options)
     
-    console.log(link)
+    console.info(link)
 
     return {
       statusCode: 200,
@@ -36,8 +38,8 @@ export const handler = async (event, context) => {
       }
     }
   } catch (err) {
-    console.log(err)
-    
+    console.error(err)
+
     return {
       statusCode: 500,
       body: JSON.stringify({ error: 'Unable to process link creation, please try again.', details: err }),
