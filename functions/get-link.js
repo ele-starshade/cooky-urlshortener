@@ -4,6 +4,11 @@ export const handler = async (event, context) => {
   const pathBlocks = event.path.split('/')
   const id = pathBlocks[pathBlocks.length - 1]
 
+  console.log(id)
+  console.log(event, context)
+
+  if (!id) return { statusCode: 400 }
+
   const uri = `mongodb+srv://${process.env.MONGO_USERNAME}:${process.env.MONGO_TOKEN}@${process.env.MONGO_HOST}/?retryWrites=true&w=majority`
   const client = new MongoClient(uri, {
     serverApi: {
@@ -20,6 +25,8 @@ export const handler = async (event, context) => {
     const options = { projection: { _id: 0, id: 1, url: 1, userId: 0 }}
 
     const link = await links.findOne(query, options)
+    
+    console.log(link)
 
     return {
       statusCode: 200,
@@ -29,6 +36,8 @@ export const handler = async (event, context) => {
       }
     }
   } catch (err) {
+    console.log(err)
+    
     return {
       statusCode: 500,
       body: JSON.stringify({ error: 'Unable to process link creation, please try again.', details: err }),
