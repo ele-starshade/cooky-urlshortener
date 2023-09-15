@@ -23,12 +23,18 @@ export const handler = async (event, context) => {
 
     return {
       statusCode: 200,
-      body: link
+      body: JSON.stringify(link),
+      headers: {
+        "Content-Type": 'application/json'
+      }
     }
   } catch {
     return {
       statusCode: 500,
-      body: { error: 'Unable to process link creation, please try again.' }
+      body: JSON.stringify({ error: 'Unable to process link creation, please try again.' }),
+      headers: {
+        "Content-Type": 'application/json'
+      }
     }
   } finally {
     await client.close()
