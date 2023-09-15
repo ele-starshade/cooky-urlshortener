@@ -24,9 +24,8 @@ export const handler = async (event, context) => {
     const db = client.db('link-shortener')
     const links = db.collection('links')
     const query = { id }
-    const options = { projection: { _id: 0, id: 1, url: 1, userId: 0 }}
 
-    const link = await links.findOne(query, options)
+    const link = await links.findOne(query)
     
     console.info(link)
 
